@@ -36,16 +36,22 @@ docker-compose down
 ### Порты для доступа к сервисам
 - auth_service:
   http://localhost:5000
+  
 - transaction_service:
   http://localhost:5001
+  
 - Kafdrop:
   http://localhost:9000
+  
 - Kafka Manager:
   http://localhost:9001
+  
 - AKHQ:
   http://localhost:8080
+  
 - auth_service API:
   http://localhost:5000/apidocs
+  
 - transaction_service API:
   http://localhost:5001/apidocs
   
