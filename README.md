@@ -70,7 +70,7 @@ signup_form.html
 protected_web.html
 index.html
 
-2. transaction_service - Обрабатывает транзакции пользователей и отправляет их в Kafka.
+2. transaction_service - Обрабатывает транзакции пользователей и отправляет их в Kafka. 
 
 Технологии: 
 Flask
