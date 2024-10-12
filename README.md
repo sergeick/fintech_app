@@ -29,10 +29,10 @@ Fintech App — это система на базе микросервисов, 
 ### Команды для работы с Docker
 1. Запуск всех сервисов:
 docker-compose up
-
 2. Остановка сервисов:
 docker-compose down
-Порты для доступа к сервисам
+
+### Порты для доступа к сервисам
 - auth_service: http://localhost:5000
 - transaction_service: http://localhost:5001
 - Kafdrop: http://localhost:9000
