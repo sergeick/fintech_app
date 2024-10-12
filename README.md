@@ -38,6 +38,8 @@ docker-compose down
 - Kafdrop: http://localhost:9000
 - Kafka Manager: http://localhost:9001
 - AKHQ: http://localhost:8080
+- auth_service API: http://localhost:5000/apidocs
+- transaction_service API: http://localhost:5001/apidocs
   
 ### Описание сервисов и компонентов
 1. auth_service
@@ -61,9 +63,7 @@ HTML-страницы: login_transaction_form.html, send_transaction.html.
 6. Flasgger (Swagger)
 Flasgger используется для создания интерактивной документации API для всех микросервисов, обеспечивая удобный способ тестирования запросов.
 Порт: 5000 для auth_service и 5001 для transaction_service.
-Доступ через:
-http://localhost:5000/apidocs
-http://localhost:5001/apidocs.
+
 
 
 
