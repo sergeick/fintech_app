@@ -28,10 +28,8 @@ Fintech App — это система на базе микросервисов, 
 Для запуска всех микросервисов и связанных с ними инструментов используется Docker Compose. Этот инструмент позволяет одновременно запускать все контейнеры с минимальными усилиями. Docker Compose управляет контейнерами, устанавливает зависимости между ними и следит за тем, чтобы все компоненты были запущены в правильном порядке.
 
 ### Команды для работы с Docker
-1. Запуск всех сервисов:
-docker-compose up
-2. Остановка сервисов:
-docker-compose down
+1. Запуск всех сервисов: docker-compose up
+2. Остановка сервисов: docker-compose down
 
 ### Порты для доступа к сервисам
 - auth_service:
@@ -57,40 +55,38 @@ docker-compose down
   
 ### Описание сервисов и компонентов
 1. auth_service - Отвечает за аутентификацию и регистрацию пользователей.
+
 Технологии:
-Flask
-MongoDB
-Redis
-JWT
-Flasgger
+   - Flask
+   - MongoDB
+   - Redis
+   - JWT
+   - Flasgger
 
 HTML-страницы: 
-login_form.html
-signup_form.html
-protected_web.html
-index.html
+    - login_form.html
+    - signup_form.html
+    - protected_web.html
+    - index.html
 
-2. transaction_service - Обрабатывает транзакции пользователей и отправляет их в Kafka. 
+2. transaction_service - Обрабатывает транзакции пользователей и отправляет их в Kafka.
 
 Технологии: 
-Flask
-MongoDB
-Kafka
-Redis
-Flasgger
+    - Flask
+    - MongoDB
+    - Kafka
+    - Redis
+    - Flasgger
 
 HTML-страницы: 
-login_transaction_form.html
-send_transaction.html
+    - login_transaction_form.html
+    - send_transaction.html
 
 
-3. Kafdrop - Веб-интерфейс для просмотра и мониторинга топиков Kafka. Порт: 9000
-
+4. Kafdrop - Веб-интерфейс для просмотра и мониторинга топиков Kafka. Порт: 9000
 5. Kafka Manager - Инструмент управления для Kafka, предоставляет возможности для управления кластерами, топиками и конфигурацией Kafka. Порт: 9001
-
 7. AKHQ - Веб-интерфейс для администрирования и мониторинга Kafka. Порт: 8080
-Конфигурация: Использует файл application.yml, который монтируется в контейнер AKHQ.
-
+   Конфигурация: Использует файл application.yml, который монтируется в контейнер AKHQ.
 9. Flasgger (Swagger) - Flasgger используется для создания интерактивной документации API для всех микросервисов, обеспечивая удобный способ тестирования запросов. Порт:
 - 5000 для auth_service
 - 5001 для transaction_service
