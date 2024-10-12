@@ -95,28 +95,9 @@ HTML-страницы:
 
 
 ### Стек технологий и используемые библиотеки:
+Python 3.12, Flask , MongoDB, Redis, JWT (JSON Web Token), Kafka, Kafdrop, Kafka Manager, AKHQ, Flasgger, Kubernetes, Docker, Docker Compose, Werkzeug, WTForms
 
-Python 3.12 — основной язык программирования.
-Flask — веб-фреймворк для разработки микросервисов.
-MongoDB — NoSQL база данных для хранения данных о пользователях и транзакциях.
-Redis — система управления сессиями и кешем.
-JWT (JSON Web Token) — для генерации и проверки токенов аутентификации.
-Kafka — платформа обмена сообщениями для передачи данных о транзакциях.
-Kafdrop, Kafka Manager, AKHQ — инструменты для мониторинга и управления топиками Kafka.
-Flasgger — для создания интерактивной документации API (Swagger).
-Docker — контейнеризация микросервисов.
-Docker Compose — для управления многоконтейнерными приложениями.
-Werkzeug — библиотека для работы с паролями и безопасности.
-WTForms — для обработки HTML-форм на серверной стороне.
-
-Компоненты Docker:
-
-MongoDB — для хранения данных о пользователях и транзакциях.
-Redis — для управления сессиями.
-Zookeeper и Kafka — для организации очередей сообщений.
-auth_service — микросервис для аутентификации пользователей.
-transaction_service — микросервис для обработки транзакций.
-Kafdrop, Kafka Manager, AKHQ — для мониторинга и управления Kafka.
+Компоненты Docker: MongoDB, Redis, Zookeeper и Kafka, auth_service, transaction_service, Kafdrop, Kafka Manager, AKHQ
 
 
 
