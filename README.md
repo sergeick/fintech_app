@@ -58,6 +58,14 @@ HTML-страницы: login_transaction_form.html, send_transaction.html.
 Назначение: Веб-интерфейс для администрирования и мониторинга Kafka.
 Порт: 8080.
 Конфигурация: Использует файл application.yml, который монтируется в контейнер AKHQ.
+6. Flasgger (Swagger)
+Flasgger используется для создания интерактивной документации API для всех микросервисов, обеспечивая удобный способ тестирования запросов.
+Порт: 5000 для auth_service и 5001 для transaction_service.
+Доступ через:
+http://localhost:5000/apidocs
+http://localhost:5001/apidocs.
+
+
 
 ===
 
