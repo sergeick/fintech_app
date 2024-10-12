@@ -74,13 +74,13 @@ services:
   akhq:
     image: tchiotludo/akhq:latest
     container_name: akhq
-    platform: linux/amd64  # Указание платформы для эмуляции на arm64
+    platform: linux/amd64
     ports:
-      - "8080:8080"  # Порт для доступа к веб-интерфейсу AKHQ
+      - "8080:8080"
     volumes:
-      - ./application.yml:/app/application.yml  # Монтирование конфигурационного файла
+      - ./application.yml:/app/application.yml
     depends_on:
-      - kafka  # Убедитесь, что Kafka уже запущен
+      - kafka
     networks:
       - app-network
 
@@ -109,7 +109,7 @@ services:
       - "9001:9000"
     environment:
       - ZK_HOSTS=zookeeper:2181
-      - APPLICATION_SECRET=your_application_secret  # Измените на свой секретный ключ
+      - APPLICATION_SECRET=your_application_secret
       - KM_DEFAULT_CLUSTER=kafka
       - KM_CLUSTER_0_NAME=default
       - KM_CLUSTER_0_ZOOKEEPER=zookeeper:2181

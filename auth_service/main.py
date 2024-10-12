@@ -1,127 +1,3 @@
-# import os
-# from flask import Flask, request, jsonify, Response
-# from werkzeug.security import generate_password_hash, check_password_hash
-# import redis
-# import pymongo
-# import jwt
-# import datetime
-# from functools import wraps
-# import json  # Добавлен импорт json для использования json.dumps
-#
-# # Инициализация Flask
-# app = Flask(__name__)
-# app.config['JSON_AS_ASCII'] = False
-#
-# # Секретный ключ для подписи JWT токенов
-# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default_secret_key')
-#
-# # Настройка подключения к Redis для хранения сессий (если требуется)
-# redis_client = redis.StrictRedis(host='redis', port=6379, db=0)
-#
-# # Настройка подключения к MongoDB для хранения данных о пользователях
-# mongo_client = pymongo.MongoClient("mongodb://mongo:27017/")
-# db = mongo_client["fintech_app"]
-# users_collection = db["users"]
-#
-# # Декоратор для проверки JWT токена
-# def token_required(f):
-#     @wraps(f)
-#     def decorated(*args, **kwargs):
-#         token = None
-#
-#         # JWT передаётся в заголовке Authorization
-#         if 'Authorization' in request.headers:
-#             auth_header = request.headers['Authorization']
-#             if auth_header.startswith('Bearer '):
-#                 token = auth_header.split(" ")[1]
-#
-#         if not token:
-#             response = json.dumps({'message': 'Токен отсутствует!'}, ensure_ascii=False)
-#             return Response(response, status=401, mimetype='application/json; charset=utf-8')
-#
-#         try:
-#             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-#             current_user = users_collection.find_one({'username': data['username']})
-#             if not current_user:
-#                 response = json.dumps({'message': 'Пользователь не найден!'}, ensure_ascii=False)
-#                 return Response(response, status=401, mimetype='application/json; charset=utf-8')
-#         except jwt.ExpiredSignatureError:
-#             response = json.dumps({'message': 'Срок действия токена истёк!'}, ensure_ascii=False)
-#             return Response(response, status=401, mimetype='application/json; charset=utf-8')
-#         except jwt.InvalidTokenError:
-#             response = json.dumps({'message': 'Недействительный токен!'}, ensure_ascii=False)
-#             return Response(response, status=401, mimetype='application/json; charset=utf-8')
-#
-#         # Добавляем текущего пользователя в аргументы функции
-#         return f(current_user, *args, **kwargs)
-#
-#     return decorated
-#
-# # Маршрут для регистрации пользователя
-# @app.route('/auth/signup', methods=['POST'])
-# def signup():
-#     data = request.get_json()
-#     if 'username' not in data or 'password' not in data:
-#         response = json.dumps({"error": "Требуются имя пользователя и пароль"}, ensure_ascii=False)
-#         return Response(response, status=400, mimetype='application/json; charset=utf-8')
-#
-#     # Проверяем, существует ли пользователь с таким же именем
-#     if users_collection.find_one({"username": data['username']}):
-#         response = json.dumps({"error": "Имя пользователя уже занято"}, ensure_ascii=False)
-#         return Response(response, status=400, mimetype='application/json; charset=utf-8')
-#
-#     # Хеширование пароля для безопасности
-#     hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
-#
-#     # Создание пользователя
-#     user = {
-#         "username": data['username'],
-#         "password": hashed_password
-#     }
-#
-#     # Добавление пользователя в MongoDB
-#     users_collection.insert_one(user)
-#
-#     response = json.dumps({"message": "Пользователь успешно зарегистрирован"}, ensure_ascii=False)
-#     return Response(response, status=201, mimetype='application/json; charset=utf-8')
-#
-# # Маршрут для логина пользователя
-# @app.route('/auth/login', methods=['POST'])
-# def login():
-#     data = request.get_json()
-#     if 'username' not in data or 'password' not in data:
-#         response = json.dumps({"error": "Требуются имя пользователя и пароль"}, ensure_ascii=False)
-#         return Response(response, status=400, mimetype='application/json; charset=utf-8')
-#
-#     user = users_collection.find_one({"username": data['username']})
-#
-#     # Проверка соответствия пароля
-#     if user and check_password_hash(user['password'], data['password']):
-#         # Генерация JWT токена
-#         token = jwt.encode({
-#             'username': user['username'],
-#             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
-#         }, app.config['SECRET_KEY'], algorithm="HS256")
-#
-#         response_data = {"message": "Вход выполнен успешно", "token": token}
-#         response = json.dumps(response_data, ensure_ascii=False)
-#         return Response(response, status=200, mimetype='application/json; charset=utf-8')
-#
-#     response = json.dumps({"message": "Неверные учетные данные"}, ensure_ascii=False)
-#     return Response(response, status=401, mimetype='application/json; charset=utf-8')
-#
-# # Защищённый маршрут для тестирования
-# @app.route('/auth/protected', methods=['GET'])
-# @token_required
-# def protected_route(current_user):
-#     message = f'Здравствуйте, {current_user["username"]}! Это защищённый маршрут.'
-#     response = json.dumps({'message': message}, ensure_ascii=False)
-#     return Response(response, status=200, mimetype='application/json; charset=utf-8')
-#
-# if __name__ == "__main__":
-#     app.run(host="0.0.0.0", port=5000)
-
-
 import os
 from flask import Flask, request, jsonify, Response, render_template, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -130,7 +6,7 @@ import pymongo
 import jwt
 import datetime
 from functools import wraps
-import json  # Для использования json.dumps
+import json
 from flasgger import Swagger, swag_from
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
@@ -142,7 +18,7 @@ app.config['JSON_AS_ASCII'] = False
 
 # Секретный ключ для подписи JWT токенов
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default_secret_key')
-app.config['WTF_CSRF_ENABLED'] = False  # Для упрощения примера
+app.config['WTF_CSRF_ENABLED'] = False
 
 # Инициализация Flasgger
 swagger = Swagger(app)
@@ -491,5 +367,4 @@ def index():
 
 
 if __name__ == "__main__":
-    # Создайте папку templates и добавьте файлы signup_form.html, login_form.html и protected_web.html
     app.run(host="0.0.0.0", port=5000)

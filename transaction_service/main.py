@@ -38,17 +38,15 @@ swagger = Swagger(app)
 app.config['SESSION_TYPE'] = 'redis'
 app.config['SESSION_REDIS'] = redis.StrictRedis(host='redis', port=6379, db=0)
 app.config['SESSION_COOKIE_NAME'] = 'fintech_session'
-# Удалите или закомментируйте следующую строку, если возникают проблемы с куками
-# app.config['SESSION_COOKIE_DOMAIN'] = 'localhost'
 app.config['SESSION_COOKIE_PATH'] = '/'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_SECURE'] = False  # Установите True для HTTPS в продакшене
+app.config['SESSION_COOKIE_SECURE'] = False  # True для HTTPS в продакшене
 Session(app)
 
 # Настройка подключения к MongoDB
 try:
     mongo_client = pymongo.MongoClient("mongodb://mongo:27017/", serverSelectionTimeoutMS=5000)
-    mongo_client.admin.command('ping')  # Проверка подключения
+    mongo_client.admin.command('ping')
     db = mongo_client["fintech_app"]
     transactions_collection = db["transactions"]
     logger.info("Подключение к MongoDB успешно установлено.")
@@ -110,7 +108,7 @@ def login():
             if response.status_code == 200:
                 token = response.json().get('token')
                 session['token'] = token
-                logger.info(f"Токен сохранён в сессии: {token}")  # Добавлено логирование
+                logger.info(f"Токен сохранён в сессии: {token}")
                 flash("Вход выполнен успешно.", "success")
                 return redirect(url_for('send_transaction'))
             else:
@@ -270,7 +268,7 @@ def get_transactions(current_user):
     try:
         transactions = list(transactions_collection.find({"user_id": current_user}))
         for txn in transactions:
-            txn['_id'] = str(txn['_id'])  # Преобразуем ObjectId в строку
+            txn['_id'] = str(txn['_id'])
         response = json.dumps(transactions, ensure_ascii=False)
         logger.info(f"Получено {len(transactions)} транзакций для пользователя {current_user}.")
         return Response(response, status=200, mimetype='application/json; charset=utf-8')
@@ -303,7 +301,6 @@ def consume_transactions():
                 continue
             if msg.error():
                 if msg.error().code() == KafkaError._PARTITION_EOF:
-                    # Конец раздела
                     continue
                 else:
                     logger.error(f"Ошибка потребителя: {msg.error()}")
@@ -328,5 +325,4 @@ def start_consumer():
 start_consumer()
 
 if __name__ == "__main__":
-    # Убедитесь, что папка templates существует и содержит send_transaction.html и login_transaction_form.html
     app.run(host="0.0.0.0", port=5001)
