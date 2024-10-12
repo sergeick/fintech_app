@@ -38,7 +38,7 @@ docker-compose down
 - Kafdrop: http://localhost:9000
 - Kafka Manager: http://localhost:9001
 - AKHQ: http://localhost:8080
-- 
+  
 ### Описание сервисов и компонентов
 1. auth_service
 Назначение: Отвечает за аутентификацию и регистрацию пользователей.
