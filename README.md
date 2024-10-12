@@ -95,9 +95,10 @@ HTML-страницы:
 
 
 ### Стек технологий и используемые библиотеки:
-Python 3.12, Flask , MongoDB, Redis, JWT (JSON Web Token), Kafka, Kafdrop, Kafka Manager, AKHQ, Flasgger, Kubernetes, Docker, Docker Compose, Werkzeug, WTForms
+Python 3.12, Flask, MongoDB, Redis, JWT (JSON Web Token), Kafka, Kafdrop, Kafka Manager, AKHQ, Flasgger, Kubernetes, Docker, Docker Compose, Werkzeug, WTForms
 
-Компоненты Docker: MongoDB, Redis, Zookeeper и Kafka, auth_service, transaction_service, Kafdrop, Kafka Manager, AKHQ
+Компоненты Docker:
+MongoDB, Redis, Zookeeper и Kafka, auth_service, transaction_service, Kafdrop, Kafka Manager, AKHQ
 
 
 
