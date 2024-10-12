@@ -1,0 +1,12 @@
+Flask
+pymongo
+confluent-kafka
+PyJWT
+werkzeug
+flasgger
+flask-wtf
+gunicorn
+requests
+flask-session
+redis
+

@@ -1,0 +1,9 @@
+Flask
+redis
+pymongo
+werkzeug
+PyJWT
+confluent-kafka
+gunicorn
+flasgger
+flask-wtf
