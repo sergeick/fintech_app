@@ -23,7 +23,8 @@ Fintech App — это система на базе микросервисов, 
 1. auth_service работает с Redis для управления сессиями и с MongoDB для хранения данных о пользователях.
 2. transaction_service работает с Kafka для публикации транзакций в топики и MongoDB для хранения информации о транзакциях.
 3. Все сервисы связываются через Docker-сеть (app-network), что позволяет им легко взаимодействовать друг с другом без необходимости указывать IP-адреса.
-Запуск и управление Docker-контейнерами
+
+### Запуск и управление Docker-контейнерами
 Для запуска всех микросервисов и связанных с ними инструментов используется Docker Compose. Этот инструмент позволяет одновременно запускать все контейнеры с минимальными усилиями. Docker Compose управляет контейнерами, устанавливает зависимости между ними и следит за тем, чтобы все компоненты были запущены в правильном порядке.
 
 ### Команды для работы с Docker
@@ -38,33 +39,56 @@ docker-compose down
 - Kafdrop: http://localhost:9000
 - Kafka Manager: http://localhost:9001
 - AKHQ: http://localhost:8080
-- auth_service API: http://localhost:5000/apidocs
-- transaction_service API: http://localhost:5001/apidocs
+- auth_service API:
+  http://localhost:5000/apidocs
+- transaction_service API:
+  http://localhost:5001/apidocs
   
 ### Описание сервисов и компонентов
-1. auth_service
-Назначение: Отвечает за аутентификацию и регистрацию пользователей.
-Технологии: Flask, MongoDB, Redis, JWT, Flasgger.
-HTML-страницы: login_form.html, signup_form.html, protected_web.html, index.html.
-2. transaction_service
-Назначение: Обрабатывает транзакции пользователей и отправляет их в Kafka.
-Технологии: Flask, MongoDB, Kafka, Redis, Flasgger.
-HTML-страницы: login_transaction_form.html, send_transaction.html.
-3. Kafdrop
-Назначение: Веб-интерфейс для просмотра и мониторинга топиков Kafka.
-Порт: 9000.
-4. Kafka Manager
-Назначение: Инструмент управления для Kafka, предоставляет возможности для управления кластерами, топиками и конфигурацией Kafka.
-Порт: 9001.
-5. AKHQ
-Назначение: Веб-интерфейс для администрирования и мониторинга Kafka.
-Порт: 8080.
+1. auth_service - Отвечает за аутентификацию и регистрацию пользователей.
+
+Технологии:
+Flask
+MongoDB
+Redis
+JWT
+Flasgger
+
+HTML-страницы: 
+login_form.html
+signup_form.html
+protected_web.html
+index.html
+
+2. transaction_service - Обрабатывает транзакции пользователей и отправляет их в Kafka.
+
+Технологии: 
+Flask
+MongoDB
+Kafka
+Redis
+Flasgger
+
+HTML-страницы: 
+login_transaction_form.html
+send_transaction.html
+
+
+3. Kafdrop - Веб-интерфейс для просмотра и мониторинга топиков Kafka.
+Порт: 9000
+
+5. Kafka Manager - Инструмент управления для Kafka, предоставляет возможности для управления кластерами, топиками и конфигурацией Kafka.
+Порт: 9001
+
+7. AKHQ - Веб-интерфейс для администрирования и мониторинга Kafka.
+Порт: 8080
+
 Конфигурация: Использует файл application.yml, который монтируется в контейнер AKHQ.
-6. Flasgger (Swagger)
-Flasgger используется для создания интерактивной документации API для всех микросервисов, обеспечивая удобный способ тестирования запросов.
-Порт: 5000 для auth_service и 5001 для transaction_service.
 
-
+9. Flasgger (Swagger) - Flasgger используется для создания интерактивной документации API для всех микросервисов, обеспечивая удобный способ тестирования запросов.
+Порт:
+- 5000 для auth_service
+- 5001 для transaction_service
 
 
 ===
