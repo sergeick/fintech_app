@@ -62,8 +62,9 @@ Fintech App — это система на базе микросервисов, 
 - Flask
 - MongoDB
 - Redis
-- JWT
+- JWT (JSON Web Token)
 - Flasgger
+- Gunicorn (HTTP сервер для развертывания Flask-приложений)
 
 HTML-страницы: 
 - login_form.html
@@ -79,6 +80,7 @@ HTML-страницы:
 - Kafka
 - Redis
 - Flasgger
+- Gunicorn
 
 HTML-страницы: 
 - login_transaction_form.html
@@ -95,10 +97,19 @@ HTML-страницы:
 
 
 ### Стек технологий и используемые библиотеки:
-Python 3.12, Flask, MongoDB, Redis, JWT (JSON Web Token), Kafka, Kafdrop, Kafka Manager, AKHQ, Flasgger, Kubernetes, Docker, Docker Compose, Werkzeug, WTForms
-
-Компоненты Docker:
-MongoDB, Redis, Zookeeper и Kafka, auth_service, transaction_service, Kafdrop, Kafka Manager, AKHQ
+- Язык программирования: Python 3.12
+- Фреймворк: Flask (веб-фреймворк для разработки микросервисов)
+- Базы данных: MongoDB (для хранения информации о пользователях и транзакциях)
+- Кэширование и сессии: Redis
+- Аутентификация и авторизация: JWT (JSON Web Token)
+- Система обмена сообщениями: Kafka
+- Инструменты мониторинга и управления Kafka: Kafdrop, Kafka Manager, AKHQ
+- Документация API: Flasgger (генерация документации Swagger)
+- Контейнеризация и оркестрация: Docker, Docker Compose, Kubernetes
+- Сервер для деплоя: Gunicorn (HTTP сервер для развертывания Flask-приложений)
+- Работа с формами: WTForms
+- Безопасность и управление сессиями: Werkzeug
+- Kafka-клиенты: confluent_kafka (для продюсера и потребителя Kafka)
 
 
 
